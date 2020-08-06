@@ -34,7 +34,7 @@ paths:
             fromNumber\" : \"$input.params('From')\",\n    \"image\" : \"$input.params('MediaUrl0')\"\
             ,\n    \"numMedia\" : \"$input.params('NumMedia')\"\n}"
         # NOTE: Replace <<region>> and <<account>> fields
-        uri: arn:aws:apigateway:<<region>>:lambda:path/2015-03-31/functions/arn:aws:lambda:<<region>>:<<accountId>>:function:${stageVariables.LambdaFunctionName}/invocations
+        uri: arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:776870553606:function:${stageVariables.LambdaFunctionName}/invocations
         passthroughBehavior: "when_no_templates"
         httpMethod: "POST"
         contentHandling: "CONVERT_TO_TEXT"

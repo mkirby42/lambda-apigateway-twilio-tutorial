@@ -20,7 +20,7 @@ Resources:
     Properties:
       Handler: lambda_function.lambda_handler
       Runtime: python2.7
-      CodeUri: s3://<bucket-name>/lambda_function.zip #UPDATE
+      CodeUri: s3://pix-bucket/lambda_function.zip #UPDATE
       Description: Lambda handler for API Gateway - Twilio integration
       MemorySize: 256
       Timeout: 60
@@ -35,11 +35,11 @@ Resources:
   ApiGatewayApi:
     Type: AWS::Serverless::Api
     Properties:
-      DefinitionUri: s3://<bucket>/swagger.yaml #UPDATE
+      DefinitionUri: s3://pix-bucket/swagger.yaml #UPDATE
       StageName: Prod
       Variables:
         # NOTE: Before using this template, replace the <<region>> and <<account>> fields
-        #       in Lambda integration URI in the swagger file to region and accountId 
+        #       in Lambda integration URI in the swagger file to region and accountId
         #       you are deploying to
         LambdaFunctionName: !Ref LambdaFunction
 

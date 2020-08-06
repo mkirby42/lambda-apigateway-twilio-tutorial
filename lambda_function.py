@@ -1,7 +1,7 @@
 '''
 Twilio Ingest Lambda handler code
 
-Recieve an image URL from Twilio 
+Recieve an image URL from Twilio
 Apply a filter to the image and store in S3
 Return filtered image URL to the user
 
@@ -20,16 +20,17 @@ from twilio.rest import TwilioRestClient
 
 # create Twilio session
 # Add Twilio Keys
-account_sid = "account_sid"
-auth_token = "auth_token"
+account_sid = "AC1d047089fc706f849011e0f17d2ed287"
+auth_token = "a3ec04558f644e6e19af7fae264e12bf"
+# 18182769915
 client = TwilioRestClient(account_sid, auth_token)
 
 # create an S3 & Dynamo session
 s3 = boto3.resource('s3')
 session = Session()
 # Add Dynamo Region and Table
-dynamodb = boto3.resource('dynamodb', '_region_')
-table_users = dynamodb.Table('table_name')
+dynamodb = boto3.resource('dynamodb', 'us-east-2')
+table_users = dynamodb.Table('pix')
 
 def sample_filter(im):
     '''
@@ -69,7 +70,7 @@ def lambda_handler(event, context):
         # Apply an Image filter
         im_buffer = image.read()
         im = Image.open(StringIO.StringIO(im_buffer))
-        im = sample_filter(im)	
+        im = sample_filter(im)
 
         # Add to S3 Bucket
         bucket = "s3_bucket_name"
@@ -88,5 +89,5 @@ def lambda_handler(event, context):
     else:
 
         twilio_resp = "No image found, try sending a selfie!"
-        
+
     return twilio_resp
